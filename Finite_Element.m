@@ -1,5 +1,5 @@
 clear; close all; clc; 
-load('C:\Users\Mohammad Reza\Desktop\Process\2.mat',"Input");
+%load('Load your boundry conditions',"Input");
 
 allData = zeros(101, 101, 120);
 
@@ -14,8 +14,11 @@ for j = 1 : 120
     T = 10;
     L = 3;
     
-    inTemp = Input(j, 1);
-    outTemp = Input(j, 2);
+    %inTemp = Input(j, 1);
+    %outTemp = Input(j, 2);
+    
+    inTemp = 20;
+    outTemp = 100;
     
     deltaT = T/not;
     non = noe+1; 
