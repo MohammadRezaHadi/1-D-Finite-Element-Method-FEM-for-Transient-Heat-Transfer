@@ -18,12 +18,37 @@ The script computes the temperature distribution along a rod over time, given ma
 
 ---
 
-## How It Works
-1. Discretizes the rod into elements and sets up global **stiffness** and **capacity** matrices.  
-2. Applies **Dirichlet boundary conditions** at both ends.  
-3. Time integration is performed using the **θ-method** (`θ = 2/3`).  
-4. Results are stored in `allData` and exported as `A_matrix_3.mat`.  
-5. Temperature profiles are plotted dynamically.  
+## Mathematical Background
+
+The governing equation for **1D transient heat conduction** is:
+
+\[
+\rho c \frac{\partial T}{\partial t} = \lambda \frac{\partial^2 T}{\partial x^2}, \quad 0 < x < L, \; 0 < t < T
+\]
+
+where  
+- \( T(x,t) \): temperature  
+- \( \rho \): density  
+- \( c \): specific heat capacity  
+- \( \lambda \): thermal conductivity  
+
+### Weak Formulation
+By multiplying with a test function \( v \) and integrating over the domain:
+
+\[
+\int_{0}^{L} \rho c \, v \, \frac{\partial T}{\partial t} \, dx 
++ \int_{0}^{L} \lambda \, \frac{\partial v}{\partial x} \, \frac{\partial T}{\partial x} \, dx 
+= \left[ \lambda v \frac{\partial T}{\partial x} \right]_{0}^{L}
+\]
+
+### Time Discretization
+The **θ-method** is applied for temporal integration:
+
+\[
+C \frac{T^{n+1} - T^n}{\Delta t} + \theta K T^{n+1} + (1-\theta) K T^n = 0
+\]
+
+with \( \theta = \tfrac{2}{3} \) (unconditionally stable).  
 
 ---
 
